@@ -2,6 +2,6 @@
 "Description","Description of the card","text-area",
 "Hue","Hue of the card","text",
 "Card ID","The unique identifier of the card","text",
-"type","Type of card","option","world|military|dev",
-"vp","Victory Points","text",
-"cost","Cost of the card","text",
+"Type","Type of card","option","world|military|dev"
+"VP","Victory Points","text",
+"Cost","Cost of the card","text",

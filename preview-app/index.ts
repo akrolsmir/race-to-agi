@@ -22,9 +22,14 @@ function parseCard(line: string) {
   // In addition, parse Description to Description1, Description2, etc.
   // For example, "1: +2C; 4: 3=>B" -> Description1 = "+2C", Description2 = "3=>B"
   // Note that this does break cider compat...
-  const split = card.Description?.split('; ')
+  const split = card.Description?.split('; ') ?? []
+  const descMap = {} as Record<string, string>
+  for (const s of split) {
+    const [i, desc] = s.split(': ')
+    descMap[i] = desc
+  }
   for (const i of [1, 2, 3, 4, 5]) {
-    card[`Description${i}`] = split?.[i - 1]?.split(': ')[1] ?? ''
+    card[`Description${i}`] = descMap[i] ?? ''
   }
 
   return card

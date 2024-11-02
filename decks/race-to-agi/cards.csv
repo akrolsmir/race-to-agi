@@ -1,4 +1,4 @@
-"Name","Count","Front Template","Back Template","Description","Hue","Card ID","type","vp","cost"
+"Name","Count","Front Template","Back Template","Description","Hue","Card ID","Type","VP","Cost"
 "New Galactic Order","1","Front Simple","Front Simple","Draw 2 cards.","45","1","dev","?","6"
 "Deserted Alien Outpost","1","Front Simple","Front Simple",".","45","2","world","3","4"
 "Spice World","1","Front Simple","Front Simple","$: $U=>+2","180","3","world","1","2"

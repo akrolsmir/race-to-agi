@@ -1,0 +1,64 @@
+.card {
+    width: 825px;
+    height: 1125px;
+    border-radius: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 40px;
+    background-color: hsl({{card.hue}}, 30%, 50%);
+}
+.card .header {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    font-size: 60px;
+    font-weight: 600;
+    padding: 45px;
+    padding-top: 55px;
+    background-color: hsl({{card.hue}}, 30%, 50%);
+    color: hsl({{card.hue}}, 30%, 20%);
+    background: radial-gradient(
+        hsl({{card.hue}}, 30%, 60%), 
+        hsl({{card.hue}}, 30%, 50%));
+}
+.card .image {
+    flex: 1;
+    padding: 45px;
+    font-size: 150px;
+    background-image: url({{index assets card.name}});
+    background-position: center;
+    background-size: cover;
+}
+.card .footer {
+    background-color: hsl({{card.hue}}, 30%, 30%);
+    color: hsl({{card.hue}}, 30%, 80%);
+    background: radial-gradient(
+        hsl({{card.hue}}, 30%, 40%), 
+        hsl({{card.hue}}, 30%, 30%));
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.card .footer .description {
+    height: 250px;
+    padding: 60px;
+    padding-top: 80px;
+    {{#if (gt card.description.length 100)}}
+        font-size: 36px;
+    {{/if}}
+}
+.card .footer .id {
+    text-align: right;
+    padding-right: 60px;
+    padding-bottom: 45px;
+    color: hsl({{card.hue}}, 30%, 50%);
+}
+.overlay {
+    width: 825px;
+    height: 1125px;
+    top: 0;
+    position: absolute;
+    background-image: url({{assets.card-overlay}});
+    filter: hue-rotate({{add -50 card.hue}}deg);
+    border-radius: 25px;
+}

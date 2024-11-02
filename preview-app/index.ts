@@ -13,23 +13,31 @@ const headers = cardsFile
   ?.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)
   ?.map((val) => val.replace(/^,?"?|"?$/g, "").replace(/""/g, '"'));
 
-console.log("headers", headers);
+function parseCard(line: string) {
+  const values = line
+    ?.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)
+    ?.map((val) => val.replace(/^,?"?|"?$/g, "").replace(/""/g, '"'));
+
+  const card = Object.fromEntries(
+    headers?.map((header, i) => [header, values?.[i]]) ?? []
+  );
+
+  // In addition, parse Description to Description1, Description2, etc.
+  // For example, "1: +2C; 4: 3=>B" -> Description1 = "+2C", Description2 = "3=>B"
+  // Note that this does break cider compat...
+  const split = card.Description?.split("; ");
+  for (const i of [1, 2, 3, 4, 5]) {
+    card[`Description${i}`] = split?.[i - 1]?.split(": ")[1] ?? "";
+  }
+
+  return card;
+}
 
 const cards = cardsFile
   .split("\n")
   .slice(1) // Skip header row
   .filter((line) => line.trim()) // Remove empty lines
-  .map((line) => {
-    const values = line
-      ?.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)
-      ?.map((val) => val.replace(/^,?"?|"?$/g, "").replace(/""/g, '"'));
-
-    return Object.fromEntries(
-      headers?.map((header, i) => [header, values?.[i]]) ?? []
-    );
-  });
-
-console.log("cards", cards);
+  .map(parseCard);
 
 function renderCard(card, index) {
   const cardId = `card-${index}`;

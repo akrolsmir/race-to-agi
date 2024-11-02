@@ -22,3 +22,18 @@ To run:
 ```bash
 bun dev
 ```
+
+### Dev notes
+
+- The Game Crafter has an API! https://www.thegamecrafter.com/developer/Intro.html
+- Could let people generate their own images (and vote on those images)
+  - More broadly: bring your own layouts; bring your own card designs
+  - What is a crowdsourced board game?
+
+TODO:
+
+- [x] split out descriptions
+- [ ] Fix hot reloading
+- [ ] Prettier
+- [ ] Parse the Figma designs
+- [ ] Import from spreadsheet

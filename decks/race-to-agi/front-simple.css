@@ -25,7 +25,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
-  background: hsl({{card.hue}}, 30%, 35%);
+  background: hsl({{card.hue}}, 45%, 45%);
   line-height: 0.9;
 }
 
@@ -63,8 +63,10 @@
 }
 .card .content {
   flex: 1;
-  padding: 50px;
-  padding-top: 60px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   color: white;
@@ -76,6 +78,21 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.card .content .phase {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.card .content .phase .numeral {
+  font-size: 30px;
+  min-width: 40px;
+  color: hsl({{card.hue}}, 30%, 70%);
+}
+
 .card .footer {
   height: 200px;
   text-align: right;

@@ -4,3 +4,4 @@
 "Card ID","The unique identifier of the card","text",
 "type","Type of card","option","world|military|dev",
 "vp","Victory Points","text",
+"cost","Cost of the card","text",

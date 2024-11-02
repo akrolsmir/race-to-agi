@@ -1,4 +1,5 @@
-"Name","Count","Front Template","Back Template","Description","Hue","Card ID","type"
-"Poison Apple","1","Front Simple","Front Simple","When drawn or taken, you must discard a card from your hand and discard this card. If you cannot discard a card from your hand, you are eliminated.","110","1",
-"Lush Apple","1","Front Simple","Front Simple","Take the top card from the discard pile.","0","2",
-"Mystic Apple","1","Front Simple","Front Simple","Look at the top 3 cards in the deck and replace them in any order.","250","3",
+"Name","Count","Front Template","Back Template","Description","Hue","Card ID","type","vp","cost"
+"New Galactic Order","1","Front Simple","Front Simple","Draw 2 cards.","45","1","dev","?","6"
+"Deserted Alien Outpost","1","Front Simple","Front Simple",".","45","2","world","3","4"
+"Spice World","1","Front Simple","Front Simple","$: $U=>+2","180","3","world","1","2"
+"Epsilon Eridani","1","Front Simple","Front Simple","3: M+1; 4: G=>1VP,1C","0","4","world","1","2"

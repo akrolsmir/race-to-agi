@@ -1,12 +1,11 @@
 import { serve } from "bun";
 
-const cardsFile = (await Bun.file(
-  "../decks/race-to-agi/cards.csv"
-).text()) as string;
-const templateFile = await Bun.file(
-  "../decks/race-to-agi/front-simple.html"
-).text();
-const cssFile = await Bun.file("../decks/race-to-agi/front-simple.css").text();
+import cardsFile from "../decks/race-to-agi/cards.csv" with { type: "text" };
+import templateFile from "../decks/race-to-agi/front-simple.html" with {
+  type: "text",
+};
+import cssFile from "../decks/race-to-agi/front-simple.css" with { type: "text" };
+
 
 const headers = cardsFile
   .split("\n")[0]

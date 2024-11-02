@@ -14,7 +14,7 @@
   font-weight: 600;
   font-size: 50px;
 
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-style: normal;
 }
@@ -80,11 +80,14 @@
 }
 
 .card .content .phase {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 20px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  width: fit-content;
+  backdrop-filter: blur(10px);
 }
 
 .card .content .phase .numeral {

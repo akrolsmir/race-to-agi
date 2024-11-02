@@ -7,68 +7,65 @@
   flex-direction: column;
   background-color: hsl({{card.hue}}, 30%, 40%);
   /* border: 45px solid hsl({{card.hue}}, 30%, 50%); */
+
   /* Just use a black border for now */
-  border: 45px solid black;
+  border: 35px solid black;
 
   color: hsl({{card.hue}}, 30%, 70%);
   font-weight: 600;
   font-size: 50px;
 
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
 }
 
 .card .header {
-  height: 200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-  background: hsl({{card.hue}}, 45%, 45%);
-  line-height: 0.9;
+  height: 60px;
+  padding: 10px 20px;
+  background: none;
+  position: relative;
+  background: black;
 }
 
 .card .header .title {
-  text-align: center;
-  flex: 1;
-  margin: 0 20px;
-  font-size: 60px;
-}
-
-.card .header .vp-hex {
-  clip-path: polygon(0% 50%, 25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%);
-  background: hsl({{card.hue}}, 30%, 30%);
-  padding: 15px;
-  min-width: 120px;
-  text-align: center;
-  font-size: 70px;
+  position: absolute;
+  right: 0px;
+  top: -10px;
+  font-size: 50px;
+  color: white;
+  text-align: right;
+  margin: 0;
 }
 
 .card .header .cost-box {
-  border: 6px solid hsl({{card.hue}}, 30%, 60%);
-  border-radius: 10px;
-  padding: 10px;
-  aspect-ratio: 3/4;
+  background: rgb(173, 216, 230);
+  border: none;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 50px;
-  font-size: 70px;
+  font-size: 80px;
+  color: black;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+
+  border: 15px solid black;
 }
 
-.card .apple {
-  height: 250px;
-  font-size: 150px;
-}
 .card .content {
   flex: 1;
-  padding: 30px;
+  /* padding: 30px; */
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); */
   color: white;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   font-size: 40px;
@@ -79,26 +76,54 @@
   background-repeat: no-repeat;
 }
 
+/* Update phase styling to be left-aligned */
 .card .content .phase {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  /* min-width: 15px; */
   gap: 20px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  width: fit-content;
-  backdrop-filter: blur(10px);
+  margin-left: 0; /* Ensure left alignment */
+  padding: 5px 15px;
+  background: rgba(0, 0, 0, 0.7); /* Darker background */
+
+  border-radius: 0 20px 20px 0;
+  width: auto;
+  min-height: 140px;
+
+  /* border: 3px solid black; */
 }
 
+/* Create colored boxes for phases */
+.card .content .phase-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+  /* margin-left: 20px; */
+  color: black;
+}
+
+.card .content .phase-I {
+  background-color: #ff0000ee;
+}
+.card .content .phase-II {
+  background-color: #ffa500ee;
+}
+.card .content .phase-III {
+  background-color: #ffff00ee;
+}
+.card .content .phase-IV {
+  background-color: #00ff00ee;
+}
+.card .content .phase-V {
+  background-color: #0000ffee;
+}
+
+/* Remove the gradient from numerals */
 .card .content .phase .numeral {
-  font-size: 30px;
-  min-width: 40px;
-  color: hsl({{card.hue}}, 30%, 70%);
-}
-
-.card .footer {
-  height: 200px;
-  text-align: right;
-  padding: 100px;
-  padding-right: 50px;
+  display: none;
+  /* background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  font-weight: bold; */
 }

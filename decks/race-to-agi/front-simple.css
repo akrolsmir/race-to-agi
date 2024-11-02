@@ -10,6 +10,10 @@
   color: hsl({{card.hue}}, 30%, 70%);
   font-weight: 600;
   font-size: 50px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .card .header {
@@ -19,6 +23,7 @@
   align-items: center;
   padding: 20px 40px;
   background: hsl({{card.hue}}, 30%, 35%);
+  line-height: 0.9;
 }
 
 .card .header .title {
@@ -29,10 +34,10 @@
 }
 
 .card .header .vp-hex {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  clip-path: polygon(0% 50%, 25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%);
   background: hsl({{card.hue}}, 30%, 30%);
   padding: 15px;
-  min-width: 50px;
+  min-width: 90px;
   text-align: center;
   font-size: 50px;
 }

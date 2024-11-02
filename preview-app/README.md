@@ -33,7 +33,8 @@ bun dev
 TODO:
 
 - [x] split out descriptions
-- [ ] Fix hot reloading
+- [x] Fix hot reloading
 - [ ] Prettier
 - [ ] Parse the Figma designs
 - [ ] Import from spreadsheet
+- [ ] Export images

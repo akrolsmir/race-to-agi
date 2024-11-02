@@ -1,4 +1,5 @@
 import { serve } from "bun";
+import { watch } from "fs";
 
 import cardsFile from "../decks/race-to-agi/cards.csv" with { type: "text" };
 import templateFile from "../decks/race-to-agi/front-simple.html" with {
@@ -66,10 +67,22 @@ function renderCard(card, index) {
   return `<style>${css}</style>${html}`;
 }
 
+// Track connected WebSocket clients
+const clients = new Set<WebSocket>();
+
 const server = serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
+
+    // Handle WebSocket upgrades
+    if (url.pathname === "/ws") {
+      const upgraded = server.upgrade(req);
+      if (!upgraded) {
+        return new Response("WebSocket upgrade failed", { status: 400 });
+      }
+      return;
+    }
 
     // Handle asset requests
     if (url.pathname.startsWith("/assets/")) {
@@ -95,6 +108,13 @@ const server = serve({
     const html = `<!DOCTYPE html>
     <html>
       <head>
+        <script>
+          // Setup WebSocket connection
+          const ws = new WebSocket('ws://' + window.location.host + '/ws');
+          ws.onmessage = (event) => {
+            if (event.data === 'reload') window.location.reload();
+          };
+        </script>
         <style>
           .card {
             transform: scale(${scale});
@@ -121,6 +141,25 @@ const server = serve({
       headers: { "Content-Type": "text/html" },
     });
   },
+  websocket: {
+    open(ws) {
+      clients.add(ws);
+    },
+    close(ws) {
+      clients.delete(ws);
+    },
+    message(ws, message) { }
+  },
+});
+
+// In the file watcher, notify all clients to reload
+watch("../", { recursive: true }, async (event, filename) => {
+  console.log(`Detected ${event} in ${filename}`);
+  
+  // Notify all clients to reload
+  for (const client of clients) {
+    client.send('reload');
+  }
 });
 
 console.log(`Listening on http://localhost:${server.port}`);

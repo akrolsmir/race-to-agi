@@ -1,1 +1,4 @@
-"Name","Count","Front Template","Back Template"
+"Name","Count","Front Template","Back Template","Description","Hue","Card ID","type"
+"Poison Apple","1","Front Simple","Front Simple","When drawn or taken, you must discard a card from your hand and discard this card. If you cannot discard a card from your hand, you are eliminated.","110","1",
+"Lush Apple","1","Front Simple","Front Simple","Take the top card from the discard pile.","0","2",
+"Mystic Apple","1","Front Simple","Front Simple","Look at the top 3 cards in the deck and replace them in any order.","250","3",

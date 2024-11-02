@@ -42,8 +42,14 @@ function renderCard(card, index) {
     // Because the Cider's template attributes assumes kebab case
     const kebabKey = key.toLowerCase().replace(/ /g, "-");
     const pattern = new RegExp(`{{card\\.${kebabKey}}}`, "g");
-    html = html.replace(pattern, value);
-    css = css.replace(pattern, value);
+
+    // Special handling for image assets
+    if (kebabKey === "image") {
+      css = css.replace(/{{index assets card.image}}/g, `/assets/${value}`);
+    } else {
+      html = html.replace(pattern, value);
+      css = css.replace(pattern, value);
+    }
   });
 
   // Scope CSS to this card instance
@@ -55,7 +61,24 @@ function renderCard(card, index) {
 
 const server = serve({
   port: 3000,
-  fetch(req) {
+  async fetch(req) {
+    const url = new URL(req.url);
+
+    // Handle asset requests
+    if (url.pathname.startsWith("/assets/")) {
+      const assetName = url.pathname.replace("/assets/", "");
+
+      // Try both jpg and png
+      for (const ext of [".jpg", ".png"]) {
+        const file = Bun.file(`../assets/${assetName}${ext}`);
+        if (await file.exists()) {
+          return new Response(file);
+        }
+      }
+
+      return new Response("Image not found", { status: 404 });
+    }
+
     const cardHtml = cards
       .map((card, index) => renderCard(card, index))
       .join("\n");

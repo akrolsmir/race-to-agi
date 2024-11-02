@@ -5,3 +5,4 @@
 "Type","Type of card","option","world|military|dev"
 "VP","Victory Points","text",
 "Cost","Cost of the card","text",
+"Image","Image of the card","text",

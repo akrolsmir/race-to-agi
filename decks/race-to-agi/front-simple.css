@@ -61,6 +61,10 @@
   flex: 1;
   padding: 50px;
   padding-top: 60px;
+  background-image: url({{index assets card.image}});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .card .footer {
   height: 200px;

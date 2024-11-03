@@ -60,7 +60,9 @@
 }
 
 .card .header .cost-box {
-  background: rgb(173, 216, 230);
+  /* background: rgb(173, 216, 230); */
+  background-color: hsl({{card.hue}}, 100%, 71%);
+
   border: none;
   border-radius: 50%;
   width: 120px;
@@ -161,6 +163,7 @@
   text-align: left;
 
   padding: 20px;
-  background-color: rgba(209, 209, 209, 0.8);
+  /* background-color: rgba(209, 209, 209, 0.8); */
+  background-color: hsl({{card.hue}}, 100%, 71%, 0.7);
   height: 100px;
 }

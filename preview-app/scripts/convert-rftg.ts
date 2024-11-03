@@ -74,6 +74,12 @@ function decapitalize(str: string): string {
     .join(' ')
 }
 
+const hueMap = {
+  'Non-Military World': 190, // Cyan
+  'Military World': 0, // Red
+  Development: 240, // Darker Blue for now
+} as Record<string, number>
+
 // Transform records
 const output = records.map((card, index) => ({
   Name: decapitalize(card.Name),
@@ -81,7 +87,7 @@ const output = records.map((card, index) => ({
   'Front Template': 'Front Simple',
   'Back Template': 'Front Simple',
   Description: formatDescription(card),
-  Hue: '0', // Default hue
+  Hue: hueMap[card.Type] || 0,
   'Card ID': index + 1, // Default ID
   Type: card.Type.toLowerCase().includes('development') ? 'dev' : 'world',
   VP: card.VPs,

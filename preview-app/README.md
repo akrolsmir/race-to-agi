@@ -32,6 +32,13 @@ bun dev
 
 TODO:
 
+Design
+
+- different colored goods
+- separate windfall vs regular worlds
+- maybe line up "dev vs world" based on the colors of the phases?
+- And then military worlds use +..., pip or cpu or sth instead of #
+
 v0
 
 - [x] split out descriptions

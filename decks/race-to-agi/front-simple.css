@@ -110,19 +110,19 @@
 }
 
 .card .content .phase-I {
-  background-color: #ff0000ee;
+  background-color: #e6f3ffee;
 }
 .card .content .phase-II {
-  background-color: #ffa500ee;
+  background-color: #b3d9ffee;
 }
 .card .content .phase-III {
-  background-color: #ffff00ee;
+  background-color: #80bfffee;
 }
 .card .content .phase-IV {
-  background-color: #00ff00ee;
+  background-color: #4da6ffee;
 }
 .card .content .phase-V {
-  background-color: #00ccffee;
+  background-color: #1a8cffee;
 }
 
 /* Remove the gradient from numerals */

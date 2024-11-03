@@ -1,7 +1,8 @@
 import { serve } from 'bun'
 import { watch } from 'fs'
 
-import cardsFile from '../decks/race-to-agi/cards.csv' with { type: 'text' }
+// import cardsFile from '../decks/race-to-agi/cards.csv' with { type: 'text' }
+import cardsFile from '../decks/race-to-agi/rftg-cards.csv' with { type: 'text' }
 import templateFile from '../decks/race-to-agi/front-simple.html' with { type: 'text' }
 import cssFile from '../decks/race-to-agi/front-simple.css' with { type: 'text' }
 
@@ -127,8 +128,8 @@ const server = serve({
             grid-template-columns: repeat(auto-fill, minmax(${
               825 * scale
             }px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-auto-rows: ${1125 * scale + 20}px;
+            gap: 10px;
           }
         </style>
       </head>

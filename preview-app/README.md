@@ -32,9 +32,20 @@ bun dev
 
 TODO:
 
+v0
+
 - [x] split out descriptions
 - [x] Fix hot reloading
-- [ ] Prettier
-- [ ] Parse the Figma designs
-- [ ] Import from spreadsheet
-- [ ] Export images
+- [x] Prettier
+- [x] Parse the Figma designs
+- [x] Import from spreadsheet
+- [ ] Export cards as images
+- [ ] AI generated art
+- [ ] Connect to TheGameCrafter API?
+
+v1
+
+- [ ] Host it all as a site
+- [ ] Let people customize names, images
+- [ ] Let people customize layouts
+- [ ] Add other games??

@@ -15,7 +15,7 @@
   font-weight: 600;
   font-size: 50px;
 
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'Exo 2', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -37,6 +37,26 @@
   color: white;
   text-align: right;
   margin: 0;
+  font-family: 'Pixelify Sans', sans-serif;
+}
+
+.card .header .vp-box {
+  /* Create hexagon shape using clip-path */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: gold;
+  width: 70px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  font-weight: 600;
+
+  color: black;
+  z-index: 1;
+  left: 130px;
+  top: -30px;
+  position: relative;
 }
 
 .card .header .cost-box {
@@ -94,7 +114,7 @@
 
   border-radius: 0 20px 20px 0;
   width: auto;
-  min-height: 140px;
+  min-height: 120px;
 
   /* border: 3px solid black; */
 }
@@ -132,4 +152,15 @@
   -webkit-background-clip: initial;
   background-clip: initial;
   font-weight: bold; */
+}
+
+/* Ideally, only show this if notes has content */
+.card .content .notes {
+  font-size: 40px;
+  color: black;
+  text-align: left;
+
+  padding: 20px;
+  background-color: rgba(209, 209, 209, 0.8);
+  height: 100px;
 }

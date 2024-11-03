@@ -40,6 +40,7 @@ v0
 - [x] Parse the Figma designs
 - [x] Import from spreadsheet
 - [ ] Export cards as images
+- [ ] Use real CSV parser to handle commas
 - [ ] AI generated art
 - [ ] Connect to TheGameCrafter API?
 

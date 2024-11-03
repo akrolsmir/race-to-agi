@@ -86,7 +86,7 @@ const output = records.map((card, index) => ({
   Type: card.Type.toLowerCase().includes('development') ? 'dev' : 'world',
   VP: card.VPs,
   Cost: card['Cost/Defense'],
-  Image: ['fusion', 'seal', 'face', 'crystal-apple'][index % 4],
+  Image: ['fusion', 'seal', 'face', 'fire-apple'][index % 4],
   Notes: card['Game End Bonus / Other Notes'],
 }))
 

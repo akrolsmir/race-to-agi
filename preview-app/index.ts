@@ -112,7 +112,7 @@ const server = serve({
     }
 
     const cardHtml = cards
-      .filter(toShow)
+      // .filter(toShow)
       .map((card, index) => renderCard(card, index))
       .join('\n')
 

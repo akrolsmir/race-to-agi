@@ -102,7 +102,17 @@ const server = serve({
       return new Response('Image not found', { status: 404 })
     }
 
+    function toShow(card) {
+      return [
+        'New Galactic Order',
+        'Epsilon Eridani',
+        'Spice World',
+        'Deserted Alien Outpost',
+      ].includes(card.Name)
+    }
+
     const cardHtml = cards
+      .filter(toShow)
       .map((card, index) => renderCard(card, index))
       .join('\n')
 

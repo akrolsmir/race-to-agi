@@ -55,6 +55,12 @@
   top: -10px;
 
   border: 15px solid black;
+
+  /* Use different font for numerals */
+  font-family: 'Exo 2', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .card .content {
@@ -116,7 +122,7 @@
   background-color: #00ff00ee;
 }
 .card .content .phase-V {
-  background-color: #0000ffee;
+  background-color: #00ccffee;
 }
 
 /* Remove the gradient from numerals */

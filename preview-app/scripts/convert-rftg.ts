@@ -64,9 +64,18 @@ function formatDescription(card: any): string {
   return actions.join('; ') || ''
 }
 
+// Turn eg "NEW GALACTIC ORDER" into "New Galactic Order"
+function decapitalize(str: string): string {
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
 // Transform records
 const output = records.map((card, index) => ({
-  Name: card.Name,
+  Name: decapitalize(card.Name),
   Count: card.Qty,
   'Front Template': 'Front Simple',
   'Back Template': 'Front Simple',

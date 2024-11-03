@@ -33,7 +33,8 @@ let records = input
   .map((record) => {
     const obj: Record<string, string> = {}
     record.forEach((value, index) => {
-      obj[headers[index]] = value
+      // Strip outer quotes
+      obj[headers[index]] = value.replace(/^"|"$/g, '')
     })
     return obj
   }) as RawRecord[]

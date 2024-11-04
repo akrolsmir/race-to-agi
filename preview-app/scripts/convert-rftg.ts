@@ -75,9 +75,9 @@ function decapitalize(str: string): string {
 }
 
 const hueMap = {
-  'Non-Military World': 190, // Cyan
-  'Military World': 0, // Red
-  Development: 240, // Darker Blue for now
+  Development: 190,
+  'Non-Military World': 240,
+  'Military World': 240,
 } as Record<string, number>
 
 // Transform records
@@ -90,23 +90,38 @@ const output = records.map((card, index) => ({
   Hue: hueMap[card.Type] || 0,
   'Card ID': index + 1, // Default ID
   Type: card.Type.toLowerCase().includes('development') ? 'dev' : 'world',
+  Production: card['Production Type'],
+  Good: card.Good,
   VP: card.VPs,
   Cost: card['Cost/Defense'],
   Image: ['fusion', 'seal', 'face', 'fire-apple'][index % 4],
   Notes: card['Game End Bonus / Other Notes'],
 }))
 
+const outputHeaders = [
+  'Name',
+  'Count',
+  'Front Template',
+  'Back Template',
+  'Description',
+  'Hue',
+  'Card ID',
+  'Type',
+  'Production',
+  'Good',
+  'VP',
+  'Cost',
+  'Image',
+  'Notes',
+]
+
 // Write output CSV
-const outputHeaders = `"Name","Count","Front Template","Back Template","Description","Hue","Card ID","Type","VP","Cost","Image","Notes"`
 const outputRows = output
-  .map(
-    (card) =>
-      `"${card.Name}","${card.Count}","${card['Front Template']}","${card['Back Template']}","${card.Description}","${card.Hue}","${card['Card ID']}","${card.Type}","${card.VP}","${card.Cost}","${card.Image}","${card.Notes}"`
-  )
+  .map((card) => outputHeaders.map((header) => `"${card[header]}"`).join(','))
   .join('\n')
 Bun.write(
   '../decks/race-to-agi/rftg-cards.csv',
-  `${outputHeaders}\n${outputRows}`
+  `${outputHeaders.join(',')}\n${outputRows}`
 )
 
 console.log(`Converted ${output.length} cards`)

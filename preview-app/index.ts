@@ -33,6 +33,20 @@ function parseCard(line: string) {
     card[`Description${i}`] = descMap[i] ?? ''
   }
 
+  // In addition, add p5-icon, eg f3.svg or g4.svg
+  if (card.Production) {
+    // if Production is "Production", use f, else g
+    const letter = card.Production === 'Production' ? 'f' : 'g'
+
+    const number = {
+      Novelty: 2,
+      Rare: 3,
+      Genes: 4,
+      Alien: 5,
+    }[card.Good as string]
+    card['p5-icon'] = `/assets/icons/${letter}${number}.svg`
+  }
+
   return card
 }
 
@@ -91,8 +105,8 @@ const server = serve({
     if (url.pathname.startsWith('/assets/')) {
       const assetName = url.pathname.replace('/assets/', '')
 
-      // Try both jpg and png
-      for (const ext of ['.jpg', '.png']) {
+      // Try bare, and also with image extensions
+      for (const ext of ['', '.jpg', '.png', '.svg']) {
         const file = Bun.file(`../assets/${assetName}${ext}`)
         if (await file.exists()) {
           return new Response(file)

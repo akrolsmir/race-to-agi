@@ -60,7 +60,6 @@
 }
 
 .card .header .cost-box {
-  /* background: rgb(173, 216, 230); */
   background-color: hsl({{card.hue}}, 100%, 71%);
 
   border: none;
@@ -132,19 +131,24 @@
 }
 
 .card .content .phase-I {
-  background-color: #e6f3ffee;
+  background-color: hsl(150, 100%, 71%);
 }
 .card .content .phase-II {
-  background-color: #b3d9ffee;
+  background-color: hsl(190, 100%, 71%);
 }
 .card .content .phase-III {
-  background-color: #80bfffee;
+  background-color: hsl(240, 100%, 71%);
 }
 .card .content .phase-IV {
-  background-color: #4da6ffee;
+  background-color: hsl(250, 100%, 64%);
 }
 .card .content .phase-V {
-  background-color: #1a8cffee;
+  background-color: hsl(260, 100%, 70%);
+}
+
+.card .content .phase-V .p5-icon {
+  width: 80px;
+  height: 80px;
 }
 
 /* Remove the gradient from numerals */

@@ -146,9 +146,13 @@
   background-color: hsl(260, 100%, 70%);
 }
 
-.card .content .phase-V .p5-icon {
-  width: 80px;
-  height: 80px;
+.p5-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  width: 140px;
+  height: 140px;
 }
 
 /* Remove the gradient from numerals */

@@ -45,6 +45,8 @@ function parseCard(line: string) {
       Alien: 5,
     }[card.Good as string]
     card['p5-icon'] = `/assets/icons/${letter}${number}.svg`
+  } else {
+    card['p5-icon'] = ''
   }
 
   return card
@@ -68,12 +70,20 @@ function renderCard(card, index) {
     const kebabKey = key.toLowerCase().replace(/ /g, '-')
     const pattern = new RegExp(`{{card\\.${kebabKey}}}`, 'g')
 
-    // Special handling for image assets
+    html = html.replace(pattern, value)
+    css = css.replace(pattern, value)
+
+    // Special handling for rendering images
     if (kebabKey === 'image') {
       css = css.replace(/{{index assets card.image}}/g, `/assets/${value}`)
+    }
+
+    // Conditional rendering: replace {{renderif card.X}} in css with "display: none;" if X is empty
+    const renderif = new RegExp(`{{renderif card\\.${kebabKey}}}`, 'g')
+    if (!value || value === '') {
+      css = css.replace(renderif, 'display: none;')
     } else {
-      html = html.replace(pattern, value)
-      css = css.replace(pattern, value)
+      css = css.replace(renderif, '')
     }
   })
 

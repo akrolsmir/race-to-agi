@@ -126,7 +126,6 @@
   flex-direction: column;
   gap: 30px;
   align-items: flex-start;
-  /* margin-left: 20px; */
   color: black;
 }
 
@@ -146,7 +145,8 @@
   background-color: hsl(260, 100%, 70%);
 }
 
-.p5-icon {
+.card .p5-icon {
+  {{renderif card.p5-icon}}
   position: absolute;
   right: 10px;
   bottom: 10px;

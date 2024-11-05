@@ -56,6 +56,7 @@ v0
 
 To fix:
 
+- [ ] Add notes
 - [ ] Colorshift to orange first
 - [ ] Fix $/4 coercion
 

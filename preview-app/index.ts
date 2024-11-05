@@ -171,6 +171,7 @@ const server = serve({
 
     const cardHtml = cards
       .filter(toShow)
+      // .slice(0, 10)
       .map((card, index) => renderCard(card, index))
       .join('\n')
 
@@ -181,12 +182,20 @@ const server = serve({
       <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
         <script>
+          // Listen for hot reloads over websocket
+          const ws = new WebSocket('ws://' + window.location.host + '/ws');
+          ws.onmessage = (event) => {
+            if (event.data === 'reload') window.location.reload();
+          };
+
           async function exportCards() {
             const cards = document.querySelectorAll('.card-inner');
             const cardData = [];
-            
+            // Time the export
+            const start = Date.now();
+            let i = 0;
+
             for (const card of cards) {
-              console.log('card', card)
               try {
                 const dataUrl = await htmlToImage.toPng(card, {
                   quality: 1.0,
@@ -199,10 +208,14 @@ const server = serve({
                   name: card.closest('.card-container').dataset.cardName,
                   dataUrl
                 });
+
+                console.log("Exported", ++i, "cards")
               } catch (error) {
                 console.error('Error capturing card:', card.closest('.card-container').dataset.cardName, error);
               }
             }
+
+            console.log("Exported in", Date.now() - start, "ms")
 
             // Send to server
             const response = await fetch('/save-cards', {

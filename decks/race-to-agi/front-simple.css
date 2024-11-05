@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiny5&display=swap');
+
 .card {
   width: calc(825px - 90px);
   height: calc(1125px - 90px);
@@ -5,11 +7,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  /* background-color: hsl({{card.hue}}, 30%, 40%); */
   border: 45px solid hsl({{card.hue}}, 50%, 89%);
 
-  /* Just use a black border for now */
-  /* border: 35px solid #C9E4EC; */
 
   color: hsl({{card.hue}}, 30%, 70%);
   font-weight: 600;
@@ -60,7 +59,6 @@
 }
 
 .card .header .cost-box {
-  /* background-color: hsl({{card.hue}}, 100%, 71%); */
   background-color: hsl({{card.hue}}, 50%, 89%);;
   border: none;
   border-radius: 50%;
@@ -79,9 +77,7 @@
 
   /* Use different font for numerals */
   font-family: 'Exo 2', sans-serif;
-  font-optical-sizing: auto;
   font-weight: 600;
-  font-style: normal;
 }
 
 .card .content {
@@ -165,13 +161,8 @@
   height: 140px;
 }
 
-/* Remove the gradient from numerals */
 .card .content .phase .numeral {
   display: none;
-  /* background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  font-weight: bold; */
 }
 
 /* Ideally, only show this if notes has content */
@@ -181,7 +172,6 @@
   text-align: left;
 
   padding: 20px;
-  /* background-color: rgba(209, 209, 209, 0.8); */
   background-color: hsl({{card.hue}}, 100%, 71%, 0.7);
   height: 100px;
 }

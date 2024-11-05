@@ -46,14 +46,17 @@ v0
 - [x] Prettier
 - [x] Parse the Figma designs
 - [x] Import from spreadsheet
-- [ ] Export cards as images
+- [x] Export cards as images
 - [ ] Use real CSV parser to handle commas
 - [ ] AI generated art
+  - Probably Flux Fal.Ai with Loras
+  - E.g. with pointilism lora from civitai: https://fal.ai/models/fal-ai/flux-lora?share=e9a56cbe-e914-403d-8621-b7c404f4ce1f
 - [ ] Connect to TheGameCrafter API?
 
 v1
 
 - [ ] Host it all as a site
+  - [ ] ... Sveltekit?
 - [ ] Let people customize names, images
 - [ ] Let people customize layouts
 - [ ] Add other games??

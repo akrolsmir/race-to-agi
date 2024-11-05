@@ -1,6 +1,6 @@
 .card {
-  width: 825px;
-  height: 1125px;
+  width: calc(825px - 90px);
+  height: calc(1125px - 90px);
   border-radius: 25px;
   text-align: center;
   display: flex;

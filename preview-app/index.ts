@@ -48,7 +48,9 @@ function parseCard(line: string) {
     }[card.Good as string]
     card['p5-icon'] = `/assets/icons/${letter}${number}.svg`
   } else {
-    card['p5-icon'] = ''
+    // Placeholder for no production -- needed for image export >.>
+    // With a proper rendering system we'd just exclude this node
+    card['p5-icon'] = '/assets/icons/empty.svg'
   }
 
   return card
@@ -99,7 +101,15 @@ function renderCard(card, index) {
   css = css.replace(/\.card/g, `.${cardId}`)
   html = html.replace('class="card"', `class="card ${cardId}"`)
 
-  return `<style>${css}</style>${html}`
+  // Create a wrapper that handles the display scaling, keeping the inner card at full size
+  return `<div class="card-container" data-card-name="${card.Name}">
+    <div class="card-scaler">
+      <div class="card-inner">
+        <style>${css}</style>
+        ${html}
+      </div>
+    </div>
+  </div>`
 }
 
 // Track connected WebSocket clients
@@ -116,7 +126,6 @@ const server = serve({
       const outputDir = join(process.cwd(), 'output')
       await mkdir(outputDir, { recursive: true })
 
-      console.log('body', body)
 
       for (const { name, dataUrl } of body.cards) {
         const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '')
@@ -172,24 +181,27 @@ const server = serve({
       <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
         <script>
-          // Setup WebSocket connection
-          const ws = new WebSocket('ws://' + window.location.host + '/ws');
-          ws.onmessage = (event) => {
-            if (event.data === 'reload') window.location.reload();
-          };
-
           async function exportCards() {
-            const cards = document.querySelectorAll('.card');
+            const cards = document.querySelectorAll('.card-inner');
             const cardData = [];
             
             for (const card of cards) {
               console.log('card', card)
-              const dataUrl = await htmlToImage.toPng(card);
-              console.log('dataUrl', dataUrl)
-              cardData.push({
-                name: card.dataset.cardName,
-                dataUrl
-              });
+              try {
+                const dataUrl = await htmlToImage.toPng(card, {
+                  quality: 1.0,
+                  backgroundColor: null,
+                  width: 825,
+                  height: 1125
+                });
+                
+                cardData.push({
+                  name: card.closest('.card-container').dataset.cardName,
+                  dataUrl
+                });
+              } catch (error) {
+                console.error('Error capturing card:', card.closest('.card-container').dataset.cardName, error);
+              }
             }
 
             // Send to server
@@ -205,24 +217,37 @@ const server = serve({
           }
         </script>
         <style>
-          .card {
+          body {
+            margin: 0;
+            padding: 20px;
+            background: #333;
+          }
+          .card-container {
+            width: ${825 * scale}px;
+            height: ${1125 * scale}px;
+            overflow: hidden;
+          }
+          .card-scaler {
             transform: scale(${scale});
             transform-origin: top left;
+          }
+          .card-inner {
+            width: 825px;
+            height: 1125px;
+            position: relative;
           }
           .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(${
               825 * scale
             }px, 1fr));
-            grid-auto-rows: ${1125 * scale + 20}px;
-            gap: 20px;
-            background: gray;
+            grid-gap: 20px;
+            padding: 20px;
           }
           #export-btn {
             top: 20px;
             right: 20px;
             padding: 10px 20px;
-            margin: 10px;
             background: #333;
             color: white;
             border: none;

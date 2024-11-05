@@ -85,6 +85,12 @@ function renderCard(card, index) {
     } else {
       css = css.replace(renderif, '')
     }
+
+    // Special icon: Replace "1 good" with <img src="/assets/icons/fX.svg" />
+    html = html.replace(
+      new RegExp(`1 good`, 'g'),
+      `<img src="/assets/icons/fX.svg" style="width: 70px; height: 70px;" />`
+    )
   })
 
   // Scope CSS to this card instance
@@ -164,6 +170,7 @@ const server = serve({
             }px, 1fr));
             grid-auto-rows: ${1125 * scale + 20}px;
             gap: 10px;
+            background: gray;
           }
         </style>
       </head>

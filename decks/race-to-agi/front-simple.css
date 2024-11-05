@@ -9,7 +9,7 @@
   /* border: 45px solid hsl({{card.hue}}, 30%, 50%); */
 
   /* Just use a black border for now */
-  border: 35px solid black;
+  border: 35px solid #C9E4EC;
 
   color: hsl({{card.hue}}, 30%, 70%);
   font-weight: 600;
@@ -26,7 +26,7 @@
   padding: 10px 20px;
   background: none;
   position: relative;
-  background: black;
+  background: #C9E4EC;
 }
 
 .card .header .title {
@@ -34,7 +34,7 @@
   right: 0px;
   top: -10px;
   font-size: 50px;
-  color: white;
+  color: black;
   text-align: right;
   margin: 0;
   font-family: 'Pixelify Sans', sans-serif;
@@ -43,7 +43,7 @@
 .card .header .vp-box {
   /* Create hexagon shape using clip-path */
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: gold;
+  background: black;
   width: 70px;
   height: 80px;
   display: flex;
@@ -52,7 +52,7 @@
   font-size: 50px;
   font-weight: 600;
 
-  color: black;
+  color: gold;
   z-index: 1;
   left: 130px;
   top: -30px;
@@ -60,8 +60,8 @@
 }
 
 .card .header .cost-box {
-  background-color: hsl({{card.hue}}, 100%, 71%);
-
+  /* background-color: hsl({{card.hue}}, 100%, 71%); */
+  background-color: #C9E4EC;
   border: none;
   border-radius: 50%;
   width: 120px;
@@ -101,10 +101,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  font-family: 'Pixelify Sans', sans-serif;
 }
 
 /* Update phase styling to be left-aligned */
-.card .content .phase {
+.card .content .phase{
   display: flex;
   align-items: center;
   /* min-width: 15px; */
@@ -120,6 +122,12 @@
   /* border: 3px solid black; */
 }
 
+.card .content .phase .text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Create colored boxes for phases */
 .card .content .phase-container {
   display: flex;
@@ -130,19 +138,19 @@
 }
 
 .card .content .phase-I {
-  background-color: hsl(150, 100%, 71%);
+  background-color: #FAFCF2;
 }
 .card .content .phase-II {
-  background-color: hsl(190, 100%, 71%);
+  background-color: #e2f5df;
 }
 .card .content .phase-III {
-  background-color: hsl(240, 100%, 71%);
+  background-color: #C9E4EC;
 }
 .card .content .phase-IV {
-  background-color: hsl(250, 100%, 64%);
+  background-color: #B9C2ED;
 }
 .card .content .phase-V {
-  background-color: hsl(260, 100%, 70%);
+  background-color: #F4CBE5;
 }
 
 .card .p5-icon {

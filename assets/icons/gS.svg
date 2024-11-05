@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 44 44">
+  <g transform="translate(0, 0)">
+    <rect x="0" y="0" width="40" height="40" rx="5" stroke="black" stroke-width="2" fill="white"/>
+    <!-- Connecting lines to next pip -->
+    <line x1="20" y1="8" x2="32" y2="20" stroke="#FFD700" stroke-width="2"/>
+    <line x1="32" y1="20" x2="20" y2="32" stroke="#FFA500" stroke-width="2"/>
+    <line x1="20" y1="32" x2="8" y2="20" stroke="#FF0000" stroke-width="2"/>
+    <line x1="8" y1="20" x2="20" y2="8" stroke="#800080" stroke-width="2"/>
+
+    <circle cx="20" cy="8" r="4" fill="#FFD700"/>
+    <circle cx="32" cy="20" r="4" fill="#FFA500"/>
+    <circle cx="20" cy="32" r="4" fill="#FF0000"/>
+    <circle cx="8" cy="20" r="4" fill="#800080"/>
+
+  </g>
+</svg> 

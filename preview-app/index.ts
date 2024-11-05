@@ -9,6 +9,13 @@ import cardsFile from '../decks/race-to-agi/rftg-cards.csv' with { type: 'text' 
 import templateFile from '../decks/race-to-agi/front-simple.html' with { type: 'text' }
 import cssFile from '../decks/race-to-agi/front-simple.css' with { type: 'text' }
 
+const GOODS_MAP = {
+  Novelty: 2,
+  Rare: 3,
+  Genes: 4,
+  Alien: 5,
+}
+
 const records = parse(cardsFile, {
   columns: true,
   skip_empty_lines: true,
@@ -31,12 +38,7 @@ function parseCard(record: any) {
   // Add p5-icon
   if (card.Production) {
     const letter = card.Production === 'Production' ? 'f' : 'g'
-    const number = {
-      Novelty: 2,
-      Rare: 3,
-      Genes: 4,
-      Alien: 5,
-    }[card.Good as string]
+    const number = GOODS_MAP[card.Good as string]
     card['p5-icon'] = `/assets/icons/${letter}${number}.svg`
   } else {
     card['p5-icon'] = '/assets/icons/empty.svg'
@@ -75,11 +77,23 @@ function renderCard(card, index) {
       css = css.replace(renderif, '')
     }
 
+    // Special: replace icons
+    const iconMap = {
+      '1 good': 'fX',
+      // '1 Rare Windfall': 'g3',
+      // '1 Rare': 'f3',
+      // 'Rare here': 'f3',
+    } as Record<string, string>
+    for (const [type, num] of Object.entries(GOODS_MAP)) {
+      iconMap[`1 ${type} Windfall`] = `g${num}`
+      iconMap[`1 ${type}`] = `f${num}`
+      iconMap[`${type} here`] = `f${num}`
+      iconMap[`${type}`] = `f${num}`
+    }
     // Special icon: Replace "1 good" with <img src="/assets/icons/fX.svg" />
-    html = html.replace(
-      new RegExp(`1 good`, 'g'),
-      `<img src="/assets/icons/fX.svg" style="width: 70px; height: 70px;" />`
-    )
+    for (const [pattern, icon] of Object.entries(iconMap)) {
+      html = html.replace(new RegExp(pattern, 'g'), `<img src="/assets/icons/${icon}.svg" style="width: 70px; height: 70px;" />`)
+    }
   })
 
   // Scope CSS to this card instance

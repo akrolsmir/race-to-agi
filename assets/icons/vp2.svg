@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 74 84">
+  <!-- Hexagon with 70x80 dimensions as specified in CSS -->
+  <path d="M35 0L70 20L70 60L35 80L0 60L0 20Z" 
+        fill="black"/>
+  
+  <!-- Number "2" in gold, using Exo 2 font -->
+  <text x="35" y="45" 
+        font-family="'Exo 2', sans-serif" 
+        font-size="50"
+        font-weight="600"
+        fill="gold"
+        text-anchor="middle"
+        dominant-baseline="middle">2</text>
+</svg> 

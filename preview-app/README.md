@@ -47,11 +47,17 @@ v0
 - [x] Parse the Figma designs
 - [x] Import from spreadsheet
 - [x] Export cards as images
-- [ ] Use real CSV parser to handle commas
+- [x] Use real CSV parser to handle commas
+- [ ] Rename & theme cards
 - [ ] AI generated art
   - Probably Flux Fal.Ai with Loras
   - E.g. with pointilism lora from civitai: https://fal.ai/models/fal-ai/flux-lora?share=e9a56cbe-e914-403d-8621-b7c404f4ce1f
 - [ ] Connect to TheGameCrafter API?
+
+To fix:
+
+- [ ] Colorshift to orange first
+- [ ] Fix $/4 coercion
 
 v1
 

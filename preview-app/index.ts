@@ -83,6 +83,9 @@ function renderCard(card, index) {
       // '1 Rare Windfall': 'g3',
       // '1 Rare': 'f3',
       // 'Rare here': 'f3',
+      '1 VP': 'vp1',
+      '2 VP': 'vp2',
+      '3 VP': 'vp3',
     } as Record<string, string>
     for (const [type, num] of Object.entries(GOODS_MAP)) {
       iconMap[`1 ${type} Windfall`] = `g${num}`

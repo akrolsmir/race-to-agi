@@ -1,5 +1,7 @@
 import { serve } from 'bun'
 import { watch } from 'fs'
+import { mkdir, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
 // import cardsFile from '../decks/race-to-agi/cards.csv' with { type: 'text' }
 import cardsFile from '../decks/race-to-agi/rftg-cards.csv' with { type: 'text' }
@@ -108,6 +110,23 @@ const server = serve({
   async fetch(req) {
     const url = new URL(req.url)
 
+    // Add new endpoint to receive and save images
+    if (url.pathname === '/save-cards' && req.method === 'POST') {
+      const body = await req.json()
+      const outputDir = join(process.cwd(), 'output')
+      await mkdir(outputDir, { recursive: true })
+
+      console.log('body', body)
+
+      for (const { name, dataUrl } of body.cards) {
+        const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '')
+        const filename = name.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.png'
+        await writeFile(join(outputDir, filename), base64Data, 'base64')
+      }
+
+      return new Response('Cards saved successfully')
+    }
+
     // Handle WebSocket upgrades
     if (url.pathname === '/ws') {
       const upgraded = server.upgrade(req)
@@ -142,7 +161,7 @@ const server = serve({
     }
 
     const cardHtml = cards
-      // .filter(toShow)
+      .filter(toShow)
       .map((card, index) => renderCard(card, index))
       .join('\n')
 
@@ -151,12 +170,39 @@ const server = serve({
     const html = `<!DOCTYPE html>
     <html>
       <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
         <script>
           // Setup WebSocket connection
           const ws = new WebSocket('ws://' + window.location.host + '/ws');
           ws.onmessage = (event) => {
             if (event.data === 'reload') window.location.reload();
           };
+
+          async function exportCards() {
+            const cards = document.querySelectorAll('.card');
+            const cardData = [];
+            
+            for (const card of cards) {
+              console.log('card', card)
+              const dataUrl = await htmlToImage.toPng(card);
+              console.log('dataUrl', dataUrl)
+              cardData.push({
+                name: card.dataset.cardName,
+                dataUrl
+              });
+            }
+
+            // Send to server
+            const response = await fetch('/save-cards', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ cards: cardData })
+            });
+
+            if (response.ok) {
+              alert('Cards exported successfully!');
+            }
+          }
         </script>
         <style>
           .card {
@@ -172,9 +218,21 @@ const server = serve({
             gap: 20px;
             background: gray;
           }
+          #export-btn {
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
         </style>
       </head>
       <body>
+        <button id="export-btn" onclick="exportCards()">Export Cards</button>
         <div class="grid">
           ${cardHtml}
         </div>

@@ -2,30 +2,23 @@ import { serve } from 'bun'
 import { watch } from 'fs'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { parse } from 'csv-parse/sync'
 
 // import cardsFile from '../decks/race-to-agi/cards.csv' with { type: 'text' }
 import cardsFile from '../decks/race-to-agi/rftg-cards.csv' with { type: 'text' }
 import templateFile from '../decks/race-to-agi/front-simple.html' with { type: 'text' }
 import cssFile from '../decks/race-to-agi/front-simple.css' with { type: 'text' }
 
-const headers = cardsFile
-  .split('\n')[0]
-  ?.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)
-  ?.map((val) => val.replace(/^,?"?|"?$/g, '').replace(/""/g, '"'))
+const records = parse(cardsFile, {
+  columns: true,
+  skip_empty_lines: true,
+})
 
-function parseCard(line: string) {
-  const values = line
-    ?.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)
-    ?.map((val) => val.replace(/^,?"?|"?$/g, '').replace(/""/g, '"'))
+function parseCard(record: any) {
+  const card = { ...record }
 
-  const card = Object.fromEntries(
-    headers?.map((header, i) => [header, values?.[i]]) ?? []
-  )
-
-  // In addition, parse Description to Description1, Description2, etc.
-  // For example, "1: +2C; 4: 3=>B" -> Description1 = "+2C", Description2 = "3=>B"
-  // Note that this does break cider compat...
-  const split = card.Description?.split('; ') ?? []
+  // Parse Description fields
+  const split = card.Description?.split('|') ?? []
   const descMap = {} as Record<string, string>
   for (const s of split) {
     const [i, desc] = s.split(': ')
@@ -35,11 +28,9 @@ function parseCard(line: string) {
     card[`Description${i}`] = descMap[i] ?? ''
   }
 
-  // In addition, add p5-icon, eg f3.svg or g4.svg
+  // Add p5-icon
   if (card.Production) {
-    // if Production is "Production", use f, else g
     const letter = card.Production === 'Production' ? 'f' : 'g'
-
     const number = {
       Novelty: 2,
       Rare: 3,
@@ -48,19 +39,13 @@ function parseCard(line: string) {
     }[card.Good as string]
     card['p5-icon'] = `/assets/icons/${letter}${number}.svg`
   } else {
-    // Placeholder for no production -- needed for image export >.>
-    // With a proper rendering system we'd just exclude this node
     card['p5-icon'] = '/assets/icons/empty.svg'
   }
 
   return card
 }
 
-const cards = cardsFile
-  .split('\n')
-  .slice(1) // Skip header row
-  .filter((line) => line.trim()) // Remove empty lines
-  .map(parseCard)
+const cards = records.map(parseCard)
 
 function renderCard(card, index) {
   const cardId = `card-${index}`
@@ -170,7 +155,7 @@ const server = serve({
     }
 
     const cardHtml = cards
-      .filter(toShow)
+      // .filter(toShow)
       // .slice(0, 10)
       .map((card, index) => renderCard(card, index))
       .join('\n')

@@ -1,6 +1,5 @@
-// Read input CSV
-const input = await Bun.file('scripts/rftg-cards-raw.csv').text()
-const headers = input.split('\n')[0].split(',')
+import { parse } from 'csv-parse/sync'
+import { stringify } from 'csv-stringify/sync'
 
 type RawRecord = {
   Name: string
@@ -26,21 +25,14 @@ type RawRecord = {
 }
 
 // For each record, convert to an object
-let records = input
-  .split('\n')
-  .slice(1)
-  .map((line) => line.split(','))
-  .map((record) => {
-    const obj: Record<string, string> = {}
-    record.forEach((value, index) => {
-      // Strip outer quotes
-      obj[headers[index]] = value.replace(/^"|"$/g, '')
-    })
-    return obj
-  }) as RawRecord[]
+const input = await Bun.file('scripts/rftg-cards-raw.csv').text()
+const records = parse(input, {
+  columns: true,
+  skip_empty_lines: true,
+}) as RawRecord[]
 
-// Only use the Base set
-records = records.filter((card) => card.Set === 'Base')
+// Filter base set (keep existing)
+const baseRecords = records.filter((card) => card.Set === 'Base')
 
 // Phase names mapping
 const phases = {
@@ -62,7 +54,7 @@ function formatDescription(card: any): string {
     }
   }
 
-  return actions.join('; ') || ''
+  return actions.join('|') || ''
 }
 
 // Turn eg "NEW GALACTIC ORDER" into "New Galactic Order"
@@ -81,7 +73,7 @@ const hueMap = {
 } as Record<string, number>
 
 // Transform records
-const output = records.map((card, index) => ({
+const output = baseRecords.map((card, index) => ({
   Name: decapitalize(card.Name),
   Count: card.Qty,
   'Front Template': 'Front Simple',
@@ -115,13 +107,11 @@ const outputHeaders = [
   'Notes',
 ]
 
-// Write output CSV
-const outputRows = output
-  .map((card) => outputHeaders.map((header) => `"${card[header]}"`).join(','))
-  .join('\n')
-Bun.write(
-  '../decks/race-to-agi/rftg-cards.csv',
-  `${outputHeaders.join(',')}\n${outputRows}`
-)
+const outputCsv = stringify(output, {
+  header: true,
+  columns: outputHeaders,
+})
+
+Bun.write('../decks/race-to-agi/rftg-cards.csv', outputCsv)
 
 console.log(`Converted ${output.length} cards`)

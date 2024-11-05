@@ -44,6 +44,9 @@ function parseCard(record: any) {
     card['p5-icon'] = '/assets/icons/empty.svg'
   }
 
+  // Special: Replace Alien as Lien for now
+  card.Name = card.Name.replace('Alien', 'Lien')
+
   return card
 }
 
@@ -167,12 +170,12 @@ const server = serve({
         'New Galactic Order',
         'Epsilon Eridani',
         'Spice World',
-        'Deserted Alien Outpost',
+        'Deserted Lien Outpost',
       ].includes(card.Name)
     }
 
     const cardHtml = cards
-      // .filter(toShow)
+      .filter(toShow)
       // .slice(0, 10)
       .map((card, index) => renderCard(card, index))
       .join('\n')
@@ -197,14 +200,15 @@ const server = serve({
             const start = Date.now();
             let i = 0;
 
+            const config = {
+              width: 825,
+              height: 1125,
+              pixelRatio: 1, // Force 1:1 pixel ratio
+            };
+
             for (const card of cards) {
               try {
-                const dataUrl = await htmlToImage.toPng(card, {
-                  quality: 1.0,
-                  backgroundColor: null,
-                  width: 825,
-                  height: 1125
-                });
+                const dataUrl = await htmlToImage.toPng(card, config);
                 
                 cardData.push({
                   name: card.closest('.card-container').dataset.cardName,

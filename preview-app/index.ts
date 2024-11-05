@@ -169,7 +169,7 @@ const server = serve({
               825 * scale
             }px, 1fr));
             grid-auto-rows: ${1125 * scale + 20}px;
-            gap: 10px;
+            gap: 20px;
             background: gray;
           }
         </style>

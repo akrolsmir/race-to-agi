@@ -5,11 +5,11 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  background-color: hsl({{card.hue}}, 30%, 40%);
-  /* border: 45px solid hsl({{card.hue}}, 30%, 50%); */
+  /* background-color: hsl({{card.hue}}, 30%, 40%); */
+  border: 45px solid hsl({{card.hue}}, 50%, 89%);
 
   /* Just use a black border for now */
-  border: 35px solid #C9E4EC;
+  /* border: 35px solid #C9E4EC; */
 
   color: hsl({{card.hue}}, 30%, 70%);
   font-weight: 600;
@@ -26,7 +26,7 @@
   padding: 10px 20px;
   background: none;
   position: relative;
-  background: #C9E4EC;
+  background: hsl({{card.hue}}, 50%, 89%);;
 }
 
 .card .header .title {
@@ -61,7 +61,7 @@
 
 .card .header .cost-box {
   /* background-color: hsl({{card.hue}}, 100%, 71%); */
-  background-color: #C9E4EC;
+  background-color: hsl({{card.hue}}, 50%, 89%);;
   border: none;
   border-radius: 50%;
   width: 120px;
@@ -141,10 +141,12 @@
   background-color: #FAFCF2;
 }
 .card .content .phase-II {
-  background-color: #e2f5df;
+  /* background-color: hsl(112, 52%, 92%); */
+  background-color: hsl(112, 50%, 89%);
 }
 .card .content .phase-III {
-  background-color: #C9E4EC;
+  /* background-color: hsl(194, 48%, 86%); */
+  background-color: hsl(194, 50%, 89%);
 }
 .card .content .phase-IV {
   background-color: #B9C2ED;

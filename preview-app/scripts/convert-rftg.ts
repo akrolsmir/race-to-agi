@@ -75,9 +75,9 @@ function decapitalize(str: string): string {
 }
 
 const hueMap = {
-  Development: 190,
-  'Non-Military World': 240,
-  'Military World': 240,
+  Development: 112,
+  'Non-Military World': 194,
+  'Military World': 194,
 } as Record<string, number>
 
 // Transform records

@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiny5&display=swap');
 
 .card {
-  width: calc(825px - 90px);
-  height: calc(1125px - 90px);
+  width: calc(825px - 160px);
+  height: calc(1125px - 160px);
   border-radius: 25px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  border: 45px solid hsl({{card.hue}}, 50%, 89%);
+  border: 80px solid hsl({{card.hue}}, 50%, 89%);
 
 
   color: hsl({{card.hue}}, 30%, 70%);
@@ -32,7 +32,7 @@
   position: absolute;
   right: 0px;
   top: -10px;
-  font-size: 50px;
+  font-size: 45px;
   color: black;
   text-align: right;
   margin: 0;
@@ -53,7 +53,7 @@
 
   color: gold;
   z-index: 1;
-  left: 130px;
+  left: 100px;
   top: -30px;
   position: relative;
 }
@@ -70,7 +70,7 @@
   font-size: 80px;
   color: black;
   position: absolute;
-  left: 10px;
+  left: -20px;
   top: -10px;
 
   border: 15px solid black;
@@ -154,8 +154,8 @@
 .card .p5-icon {
   {{renderif card.p5-icon}}
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 60px;
+  bottom: 60px;
 
   width: 140px;
   height: 140px;

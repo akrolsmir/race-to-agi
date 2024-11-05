@@ -110,6 +110,7 @@ function renderCard(card, index) {
   return `<div class="card-container" data-card-name="${card.Name}">
     <div class="card-scaler">
       <div class="card-inner">
+        <div class="card-cut"></div>
         <style>${css}</style>
         ${html}
       </div>
@@ -194,6 +195,9 @@ const server = serve({
           };
 
           async function exportCards() {
+            // Hide the cut border (card-cut)
+            document.querySelectorAll('.card-cut').forEach(el => el.style.display = 'none');
+
             const cards = document.querySelectorAll('.card-inner');
             const cardData = [];
             // Time the export
@@ -254,6 +258,16 @@ const server = serve({
             width: 825px;
             height: 1125px;
             position: relative;
+          }
+          .card-cut {
+            content: '';
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            bottom: 1px;
+            left: 1px;
+            border: 40px solid #333;
+            pointer-events: none;
           }
           .grid {
             display: grid;

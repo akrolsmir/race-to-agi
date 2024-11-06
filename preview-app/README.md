@@ -53,13 +53,17 @@ v0
   - Probably Flux Fal.Ai with Loras
   - E.g. with pointilism lora from civitai: https://fal.ai/models/fal-ai/flux-lora?share=e9a56cbe-e914-403d-8621-b7c404f4ce1f
 - [ ] Connect to TheGameCrafter API?
+- [ ] Design back
+- [ ] Design phase cards
 
 To fix:
 
-- [ ] Add notes
-- [ ] Colorshift to orange first
+- [x] Add notes spacing
+- [x] Colorshift to orange first
 - [ ] Fix $/4 coercion
-- [ ] Inconsistent icon design
+- [ ] Inconsistent icon design (borders)
+- [ ] Different cost shape for developments
+  - [ ] And special different shape for 6s?
 
 v1
 

@@ -1,8 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 44 44">
-  <g transform="translate(0, 0)">
-    <rect x="0" y="0" width="40" height="40" rx="5" stroke="white" stroke-width="2" fill="#FFA500"/>
-    <circle cx="15" cy="15" r="4" fill="white"/>
-    <circle cx="25" cy="25" r="4" fill="white"/>
-    <line x1="15" y1="15" x2="25" y2="25" stroke="white" stroke-width="2"/>
-  </g>
+  <rect x="0" y="0" width="40" height="40" rx="5" fill="#FFA500"/>
+  <circle cx="15" cy="15" r="4" fill="white"/>
+  <circle cx="25" cy="25" r="4" fill="white"/>
+  <line x1="15" y1="15" x2="25" y2="25" stroke="white" stroke-width="2"/>
 </svg> 

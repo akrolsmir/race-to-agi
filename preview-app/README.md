@@ -59,6 +59,7 @@ To fix:
 - [ ] Add notes
 - [ ] Colorshift to orange first
 - [ ] Fix $/4 coercion
+- [ ] Inconsistent icon design
 
 v1
 

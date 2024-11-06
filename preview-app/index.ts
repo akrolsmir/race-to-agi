@@ -3,6 +3,8 @@ import { watch } from 'fs'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { parse } from 'csv-parse/sync'
+import { Glob } from "bun";
+
 
 // import cardsFile from '../decks/race-to-agi/cards.csv' with { type: 'text' }
 import cardsFile from '../decks/race-to-agi/rftg-cards.csv' with { type: 'text' }
@@ -166,7 +168,41 @@ const server = serve({
       return new Response('Image not found', { status: 404 })
     }
 
+    // if /icons, show a page with all icons
+    if (url.pathname === '/icons') {
+      // List all icons files in ../assets/icons
+      const glob = new Glob("*")
+      const icons = Array.from(glob.scanSync('../assets/icons')).sort()
+      const iconsHtml = icons.map((icon) => `<img src="/assets/icons/${icon}" />`).join('\n')
+      return new Response(`<!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body {
+                margin: 0;
+                padding: 20px;
+                background: #888;
+              }
+              img {
+                width: 60px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="grid">
+              ${iconsHtml}
+            </div>
+          </body>
+        </html>`, {
+        headers: { 'Content-Type': 'text/html' },
+      })
+    }
+
+    // Only show selected cards, unless we're on /all
     function toShow(card) {
+      if (url.pathname === '/all')
+        return true
+
       return [
         'New Galactic Order',
         'Epsilon Eridani',
@@ -177,11 +213,10 @@ const server = serve({
 
     const cardHtml = cards
       .filter(toShow)
-      // .slice(0, 10)
       .map((card, index) => renderCard(card, index))
       .join('\n')
 
-    const scale = 0.3
+    const scale = 0.35
 
     const html = `<!DOCTYPE html>
     <html>

@@ -106,7 +106,7 @@ function renderCard(card, index) {
     }
     // Special icon: Replace "1 good" with <img src="/assets/icons/fX.svg" />
     for (const [pattern, icon] of Object.entries(iconMap)) {
-      html = html.replace(new RegExp(pattern, 'g'), `<img src="/assets/icons/${icon}.svg" style="width: 70px; height: 70px;" />`)
+      html = html.replace(new RegExp(pattern, 'g'), `<img src="/assets/icons/${icon}.svg" />`)
     }
   })
 
